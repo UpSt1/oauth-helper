@@ -57,6 +57,7 @@
 		"@tailwindcss/vite": "^4.0.17",
 		"@types/node": "^22.13.14",
 		"dotenv": "^16.4.7",
+		"encoding": "^0.1.13",
 		"googleapis": "^148.0.0",
 		"shadcn-svelte": "^0.14.0",
 		"svelte-radix": "^2.0.1"

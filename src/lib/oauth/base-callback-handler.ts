@@ -62,11 +62,8 @@ export function createCallbackHandler(config: CallbackConfig): RequestHandler {
       const tokens = config.transformTokenResponse?.(response) ?? response;
 
       cookies.set(`${provider}_oauth_tokens`, JSON.stringify(tokens), {
-        path: '/',
-        httpOnly: true,
-        sameSite: 'lax',
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: 60 * 60
+        path: '/', httpOnly: true, sameSite: 'lax', maxAge: 60 * 60,
+        secure: process.env.NODE_ENV === 'production'
       });
 
       return redirect(303, `/oauth/success?provider=${provider}`);

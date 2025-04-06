@@ -68,9 +68,9 @@ export function createCallbackHandler(config: CallbackConfig): RequestHandler {
         secure: process.env.NODE_ENV === 'production'
       });
 
-      return redirect(303, `/oauth/success?provider=${provider}`);
     } catch (error) {
       return redirect(303, `/oauth/error?message=Failed%20to%20exchange%20code%20for%20token`);
     }
+    return redirect(303, `/oauth/success?provider=${provider}`);
   };
 }

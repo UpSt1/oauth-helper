@@ -677,7 +677,6 @@ const squareIntegration: Integration = {
 // Export all integrations
 const integrations: Integration[] = [
   googleButtonIntegration,
-  googleClientIntegration,
   facebookIntegration,
   twitterIntegration,
   githubIntegration,
@@ -685,6 +684,7 @@ const integrations: Integration[] = [
   linkedinIntegration,
   slackIntegration,
   dropboxIntegration,
+  googleClientIntegration,
   spotifyIntegration,
   awsIntegration,
   redditIntegration,

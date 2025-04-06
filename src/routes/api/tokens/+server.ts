@@ -1,38 +1,42 @@
 import { json, type RequestHandler } from '@sveltejs/kit';
+import { getAllIntegrations } from '$lib/integrations/registry';
 
 export const GET: RequestHandler = async ({ cookies }) => {
-  const integrations = [];
-  
-  // Check for Google tokens
-  const googleTokensStr = cookies.get('google_oauth_tokens');
-  if (googleTokensStr) {
-    try {
-      const tokens = JSON.parse(googleTokensStr);
-      integrations.push({
-        provider: 'google',
-        tokens,
-        icon: 'google'
-      });
-    } catch (error) {
-      console.error('Error parsing Google tokens:', error);
-    }
-  }
-  
-  // Add other integrations here as needed
-  // Example:
-  // const githubTokensStr = cookies.get('github_oauth_tokens');
-  // if (githubTokensStr) {
-  //   try {
-  //     const tokens = JSON.parse(githubTokensStr);
-  //     integrations.push({
-  //       provider: 'github',
-  //       tokens,
-  //       icon: '/icons/github.svg'
-  //     });
-  //   } catch (error) {
-  //     console.error('Error parsing GitHub tokens:', error);
-  //   }
-  // }
-  
-  return json(integrations);
+	const integrations = getAllIntegrations();
+
+	return json(
+		integrations
+			.map((integration) => ({
+				provider: integration.id,
+				icon: integration.icon,
+				tokens: JSON.parse(
+          cookies.get(`${integration.id}_oauth_tokens`)
+          || '[]'
+        )
+			}))
+			.filter((integration) => integration.tokens.length > 0)
+	);
+};
+export const DELETE: RequestHandler = async ({ request, cookies }) => {
+	const { provider, tokenId } = await request.json();
+
+	const cookieName = `${provider}_oauth_tokens`;
+	const tokensRaw = cookies.get(cookieName) || '[]';
+	let tokens: any[] = [];
+
+	try {
+		tokens = JSON.parse(tokensRaw);
+	} catch {
+		tokens = [];
+	}
+
+	const filteredTokens = tokens.filter((t) => t.id !== tokenId);
+
+	cookies.set(cookieName, JSON.stringify(filteredTokens), {
+		path: '/',
+		httpOnly: true,
+		sameSite: 'lax'
+	});
+
+	return json({ success: true });
 };

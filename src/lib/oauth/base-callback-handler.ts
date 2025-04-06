@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 import { redirect, type RequestHandler } from '@sveltejs/kit';
 import { tryCatch } from '$lib/try-catch';
 

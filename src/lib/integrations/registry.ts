@@ -59,7 +59,7 @@ const googleButtonIntegration: Integration = {
 
 const googleClientIntegration: Integration = {
 	id: 'google',
-	name: 'Google - Oauth Client',
+	name: 'Google Client',
 	icon: 'google',
 	fields: {
 		client_id: {
@@ -245,7 +245,7 @@ const spotifyIntegration: Integration = {
 
 const awsIntegration: Integration = {
 	id: 'aws',
-	name: 'Amazon Web Services',
+	name: 'AWS',
 	icon: 'aws',
 	fields: {
 		accessKeyId: {

@@ -60,59 +60,47 @@
 	}
 </script>
 
-<div class="container mx-auto max-w-3xl justify-center px-4 py-10">
-	<Card.Root class="border-none shadow-lg">
-		<Card.Header>
-			<Card.Title class="text-center text-3xl font-bold">OAuth Credential Generator</Card.Title>
-			<Card.Description class="text-center text-muted-foreground">
+<div class="container mx-auto max-w-4xl justify-center px-4 py-10 bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
+	<Card.Root class="border-none shadow-xl bg-white/90 backdrop-blur-sm">
+		<Card.Header class="pb-6">
+			<Card.Title class="text-center text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">OAuth Credential Generator</Card.Title>
+			<Card.Description class="text-center text-muted-foreground mt-2">
 				Configure your OAuth credentials for various integrations
 			</Card.Description>
 		</Card.Header>
 
-		
-			<div class="border-b">
-				<div class="flex h-16 items-center justify-end  px-4">
-					<Button href="/tokens">
-						View Tokens
-					</Button>
+		<div class="border-b">
+			<div class="flex h-16 items-center justify-end px-4">
+				<Button href="/tokens" class="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 transition-all duration-300">
+					View Tokens
+				</Button>
+			</div>
+		</div>
+
+		<Card.Content class="space-y-8 pt-6">
+			<div class="space-y-4">
+				<Label for="integration" class="text-lg font-medium">Select Integration</Label>
+				
+				<div class="h-[270px] overflow-y-auto rounded-lg border border-slate-200 p-3 bg-white">
+					<div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
+						{#each integrations as integration}
+							<div 
+								class="flex flex-col items-center justify-center p-1.5 rounded-md border transition-all duration-200 cursor-pointer hover:shadow-sm hover:scale-105 {selectedIntegration.id === integration.id ? 'border-blue-500 bg-blue-50' : 'border-gray-100 hover:border-blue-300'}" onkeypress={() => handleChangeIntegration(integration)} role="button" tabindex="0" aria-pressed={selectedIntegration.id === integration.id} aria-label={integration.name} onclick={() => handleChangeIntegration(integration)}
+							>
+								<div class="w-6 h-6 flex items-center justify-center text-base mb-0.5 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 text-white">
+									<i class="fa-brands fa-{integration.icon}"></i>
+								</div>
+								<span class="text-center text-xs font-medium">{integration.name}</span>
+							</div>
+						{/each}
+					</div>
 				</div>
 			</div>
-
-		<Card.Content class="space-y-6 pt-6">
-			<div class="space-y-2">
-				<Label for="integration">Select Integration</Label>
-				<Select.Root
-					selected={{
-						value: selectedIntegration,
-						label: selectedIntegration.name
-					}}
-					onSelectedChange={(selected) => {
-						if (selected) handleChangeIntegration(
-							selected.value as Integration
-						);
-					}}
-				>
-				<Select.Trigger class="w-full">
-						<Select.Label>
-							<i class="fa-brands fa-integration mr-3"></i>
-						</Select.Label>
-						<Select.Value placeholder="Select an integration" />
-					</Select.Trigger>
-					<Select.Content>
-						{#each integrations as integration}
-							<Select.Item value={integration}>
-								<i class="fa-brands fa-{integration.icon} mr-3"></i>
-								{integration.name}
-							</Select.Item>
-						{/each}
-					</Select.Content>
-				</Select.Root>
-			</div>
-
-			<form onsubmit={preventDefault(handleSubmit)} class="space-y-4">
+			<form onsubmit={preventDefault(handleSubmit)} class="space-y-6">
+				
 				{#each Object.entries(selectedIntegration.fields) as [fieldName, field]}
-					<div class="space-y-2">
-						<Label for={fieldName}>{field.label}</Label>
+					<div class="space-y-2 transition-all duration-300 hover:shadow-sm p-3 rounded-lg">
+						<Label for={fieldName} class="font-medium">{field.label}</Label>
 
 						{#if field.type === 'text' || field.type === 'password'}
 							<Input
@@ -121,10 +109,11 @@
 								bind:value={fieldValues[fieldName]}
 								required={field.required}
 								placeholder={`Enter ${field.label.toLowerCase()}`}
+								class="focus:ring-2 focus:ring-blue-500 transition-all"
 							/>
 						{:else if field.type === 'checkbox'}
 							<div class="flex items-center space-x-2">
-								<Checkbox id={fieldName} bind:checked={fieldValues[fieldName]} />
+								<Checkbox id={fieldName} bind:checked={fieldValues[fieldName]} class="text-blue-500" />
 								<Label for={fieldName}>{field.label}</Label>
 							</div>
 						{:else if field.type === 'select'}
@@ -139,7 +128,7 @@
 									}
 								}}
 							>
-								<Select.Trigger class="w-full">
+								<Select.Trigger class="w-full focus:ring-2 focus:ring-blue-500 transition-all">
 									<Select.Value placeholder={`Select ${field.label.toLowerCase()}`} />
 								</Select.Trigger>
 								<Select.Content>
@@ -149,14 +138,15 @@
 								</Select.Content>
 							</Select.Root>
 						{:else if field.type === 'multiselect'}
-							<div class="space-y-4">
+							<div class="space-y-4 p-3 bg-slate-50 rounded-lg">
 								<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 									{#each field.options as scope}
-										<div class="flex items-center space-x-2">
+										<div class="flex items-center space-x-2 p-2 rounded hover:bg-slate-100 transition-all">
 											<Checkbox
 												id={scope.id}
 												checked={scope.selected || fieldValues[fieldName]?.includes(scope.id)}
 												onCheckedChange={() => handleScopeChange(fieldName, scope.id)}
+												class="text-blue-500"
 											/>
 											<Label for={scope.id} class="cursor-pointer">{scope.label}</Label>
 										</div>
@@ -166,9 +156,15 @@
 						{:else if field.type === 'multiinput'}
 							<div class="space-y-2">
 								<div class="flex gap-2">
-									<Input type="text" placeholder="Add new value" bind:value={customOption} />
+									<Input 
+										type="text" 
+										placeholder="Add new value" 
+										bind:value={customOption} 
+										class="focus:ring-2 focus:ring-blue-500 transition-all"
+									/>
 									<Button
 										type="button"
+										class="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 transition-all"
 										onclick={() => {
 											if (!field.options.find((option) => option.id === customOption)) {
 												field.options.push({
@@ -184,12 +180,13 @@
 										Add
 									</Button>
 								</div>
-								<div class="flex flex-wrap gap-2">
+								<div class="flex flex-wrap gap-2 mt-3">
 									{#each fieldValues[fieldName] as value}
-										<div class="sm flex items-center gap-2 rounded bg-secondary p-2">
+										<div class="flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-blue-800">
 											{value}
-											<Button
-												class="text-muted-foreground hover:text-primary"
+											<button
+												type="button" aria-label="Remove"
+												class="text-blue-600 hover:text-blue-800 transition-colors ml-1"
 												onclick={() => {
 													fieldValues[fieldName] = fieldValues[fieldName].filter(
 														(v: string) => v !== value
@@ -197,7 +194,7 @@
 												}}
 											>
 												<i class="fa fa-times"></i>
-											</Button>
+											</button>
 										</div>
 									{/each}
 								</div>
@@ -206,9 +203,13 @@
 					</div>
 				{/each}
 
-				<Button type="submit" class="w-full">Generate Credentials</Button>
+				<Button 
+					type="submit" 
+					class="w-full mt-8 py-6 text-lg font-medium bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+				>
+					Generate Credentials
+				</Button>
 			</form>
 		</Card.Content>
 	</Card.Root>
 </div>
-

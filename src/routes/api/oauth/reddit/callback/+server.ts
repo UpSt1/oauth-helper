@@ -6,8 +6,7 @@ export const GET = createCallbackHandler({
   clientIdKey: 'REDDIT_CLIENT_ID',
   clientSecretKey: 'REDDIT_CLIENT_SECRET',
   transformTokenRequest: (code) => ({
-    grant_type: 'authorization_code',
-    code,
+    grant_type: 'authorization_code', code,
     redirect_uri: `${process.env.API_URL}/api/oauth/reddit/callback`
   })
 });

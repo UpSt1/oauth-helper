@@ -1,0 +1,504 @@
+/* Basic Reset & Body Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8f9fa; /* Light background for sections below hero */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1, h2, h3, h4 {
+  margin-bottom: 0.75em;
+  line-height: 1.2;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Header Styles */
+.site-header {
+  background-color: #ffffff;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-placeholder a {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #555; /* Adjust color as needed */
+}
+
+.search-form {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 25px; /* Rounded corners */
+  overflow: hidden; /* Keep inputs inside */
+  flex-grow: 0.5; /* Allow it to take some space */
+  max-width: 500px;
+}
+
+.search-form input[type="text"] {
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  font-size: 0.9em;
+}
+
+.search-form input:first-of-type {
+  flex-grow: 1;
+  border-right: 1px solid #eee; /* Separator line */
+}
+
+.search-form input:last-of-type {
+ width: 120px; /* Fixed width for location */
+}
+
+
+.search-form button {
+  background-color: #0056b3; /* Blue color from button */
+  color: white;
+  border: none;
+  padding: 0 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+}
+
+.search-form button:hover {
+  background-color: #004494;
+}
+
+.header-options a {
+  margin-left: 20px;
+  font-size: 0.95em;
+  color: #555;
+}
+.header-options a:hover {
+  color: #0056b3;
+}
+
+.header-options .fa-caret-down {
+  margin-left: 4px;
+}
+
+
+/* Hero Section Styles */
+.hero-section {
+  background-color: #AEAEAE; /* Grey background from image */
+  color: white;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px; /* Limit width of text */
+}
+
+.hero-brand {
+  font-size: 0.9em;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.hero-content h1 {
+  font-size: 3em; /* Large heading */
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1em;
+}
+
+.btn-explore {
+  background-color: #0056b3; /* Blue button */
+  color: white;
+  border: none;
+}
+
+.btn-explore:hover {
+  background-color: #004494;
+}
+
+.btn-explore .fa-arrow-right {
+  margin-left: 8px;
+}
+
+/* Categories Section Styles */
+.categories-section {
+  padding: 50px 0;
+  background-color: #ffffff; /* White background for this section */
+}
+
+.categories-section h2 {
+  text-align: center;
+  font-size: 1.8em;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.category-slider {
+  display: flex;
+  align-items: center;
+  position: relative; /* For arrow positioning */
+}
+
+.category-items {
+  display: flex;
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  gap: 30px; /* Space between items */
+  flex-grow: 1;
+  /* Hide scrollbar (optional) */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.category-items::-webkit-scrollbar { /* Chrome, Safari, Opera */
+  display: none;
+}
+
+
+.category-item {
+  text-align: center;
+  flex: 0 0 auto; /* Prevent items from shrinking/growing */
+  width: 120px; /* Fixed width for items */
+}
+
+.category-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #f0f0f0; /* Placeholder circle background */
+  margin: 0 auto 15px auto;
+  border: 3px solid;
+  /* Attempt at gradient border - might need refinement */
+  border-image: linear-gradient(to right, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5) 1;
+  /* Fallback solid border */
+  border-color: #D62976; /* A color from the gradient */
+  position: relative; /* Needed if adding content inside */
+}
+
+.category-item p {
+  font-size: 0.9em;
+  color: #555;
+}
+
+.slider-arrow {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+  margin: 0 10px; /* Space from the items */
+}
+
+.slider-arrow:hover {
+  background-color: #f0f0f0;
+}
+
+.prev-arrow { }
+.next-arrow { }
+
+
+/* Services Near You Section Styles */
+.services-section {
+  padding: 50px 0;
+  /* background-color: #f8f9fa; */ /* Already set on body */
+}
+
+.services-section h2 {
+  /* text-align: center; */ /* Appears left-aligned in image */
+  font-size: 1.8em;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+  gap: 30px;
+}
+
+.service-card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  border: 1px solid #eee;
+}
+
+.service-card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Align items to top */
+  margin-bottom: 10px;
+}
+
+.service-card h3 {
+  font-size: 1.2em;
+  margin-bottom: 0; /* Remove default margin */
+  color: #333;
+}
+
+.service-card .location {
+  font-size: 0.8em;
+  color: #777;
+  text-align: right;
+  line-height: 1.3;
+}
+
+.service-card .rating {
+  margin-bottom: 10px;
+  color: #f8b400; /* Gold color for stars */
+  font-size: 0.9em;
+}
+
+.service-card .rating .fa-star {
+  margin-right: 2px;
+}
+
+.service-card .rating-value {
+  color: #333;
+  font-weight: bold;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.service-card .reviews {
+  color: #777;
+  font-size: 0.85em;
+}
+
+.service-card .category-tag {
+  font-size: 0.85em;
+  color: #555;
+  background-color: #f0f0f0;
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.service-card .description {
+  font-size: 0.9em;
+  color: #555;
+  line-height: 1.5;
+}
+
+.service-card .more-link {
+  color: #0056b3;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.service-card .more-link:hover {
+  text-decoration: underline;
+}
+
+
+/* Footer Styles */
+.site-footer-dark {
+  background-color: #000000; /* Black footer */
+  color: #ccc; /* Light grey text */
+  padding: 60px 0 20px 0;
+  font-size: 0.9em;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-column h4 {
+  color: #ffffff;
+  font-size: 1.1em;
+  margin-bottom: 20px;
+}
+
+.footer-column p, .footer-column address {
+  margin-bottom: 10px;
+  line-height: 1.7;
+  font-style: normal; /* Reset address italics */
+}
+
+.footer-column a {
+  color: #ccc;
+  transition: color 0.3s ease;
+}
+
+.footer-column a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.subscribe-form {
+  display: flex;
+  border: 1px solid #555;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.subscribe-form input[type="email"] {
+  flex-grow: 1;
+  padding: 10px;
+  border: none;
+  background-color: #222; /* Dark input background */
+  color: #ccc;
+  outline: none;
+}
+
+.subscribe-form button {
+  background-color: #333; /* Dark button */
+  color: #ccc;
+  border: none;
+  padding: 0 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.subscribe-form button:hover {
+  background-color: #555;
+}
+
+.invite-placeholder {
+  width: 60px; /* Adjust size as needed */
+  height: 60px;
+  background-color: #333; /* Placeholder color */
+  border: 1px solid #555;
+  margin-bottom: 15px;
+}
+
+.social-icons a {
+  color: #ccc;
+  margin-right: 15px;
+  font-size: 1.2em;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #ffffff;
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #333; /* Separator line */
+  font-size: 0.85em;
+  color: #888;
+}
+
+/* Basic Responsive Adjustments (Example) */
+@media (max-width: 992px) {
+  .search-form {
+      flex-grow: 0; /* Don't let it grow too much on smaller screens */
+      max-width: 350px;
+  }
+  .services-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .footer-grid {
+     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+
+@media (max-width: 768px) {
+  .header-nav {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  .search-form {
+      width: 100%;
+      max-width: none;
+      margin: 15px 0;
+  }
+  .header-options {
+      margin-top: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+  }
+   .header-options a { margin-left: 0; }
+
+  .hero-content h1 {
+      font-size: 2.2em;
+  }
+  .category-slider {
+      /* Adjustments for touch scrolling might be needed */
+  }
+   .services-grid {
+      grid-template-columns: 1fr; /* Stack cards */
+  }
+   .footer-grid {
+     grid-template-columns: 1fr; /* Stack footer columns */
+  }
+  .footer-column {
+      margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-form input:last-of-type {
+      width: 100px; /* Make location input smaller */
+  }
+  .hero-content h1 {
+      font-size: 1.8em;
+  }
+   .btn {
+      padding: 10px 20px;
+      font-size: 0.9em;
+  }
+}

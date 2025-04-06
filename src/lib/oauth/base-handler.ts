@@ -3,6 +3,7 @@ import "dotenv/config";
 import crypto from 'crypto';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit';
+import "dotenv/config";
 
 interface OAuthConfig {
   provider: string;
@@ -41,6 +42,8 @@ export function createOAuthHandler(config: OAuthConfig): RequestHandler {
       scope: transformScopes(scopes).join(scopeDelimiter),
       ...extraParams
     });
+
+    console.log(params);
 
     return json({
       redirectURL: `${authUrl}?${params}`

@@ -81,5 +81,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - [OAuth 2.0](https://oauth.net/2/)
 - [Express.js](https://expressjs.com/)
-- [Your favorite libraries and tools]
+- [Your favorite libraries and tools] 
 
